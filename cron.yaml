@@ -2,4 +2,3 @@ cron:
 - description: scheduler watcher
   url: /cron/check
   schedule: every 50 minutes
-

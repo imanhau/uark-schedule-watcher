@@ -7,7 +7,6 @@ from datetime import (datetime, timedelta)
 from models import Watcher
 from google.appengine.api import (mail, taskqueue)
 
-
 # From: https://scheduleofclasses.uark.edu/
 STRM = 1153
 
