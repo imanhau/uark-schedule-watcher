@@ -5,6 +5,10 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /admin/.*
+  script: google.appengine.ext.admin.application
+  login: admin
+
 - url: /cron/.*
   script: handlers.app
   login: admin
