@@ -27,31 +27,30 @@
         <div class="panel-body">
           <p class="lead">When you watch a course, you will immidiately get notified when 
           a course status becomes <strong>Open</strong>.</p>
-
           <form class="form-horizontal">
             <div class="form-group">
                <label for="email" class="col-lg-4 control-label">UArk Email</label>
                <div class="col-lg-8">
-                 <input type="email" class="form-control" name="email" placeholder="me@uark.edu">
+                 <input type="email" class="form-control" name="email" placeholder="me@uark.edu" ng-model="email">
                </div>
              </div>
             <div class="form-group">
                <label for="course" class="col-lg-4 control-label">Course #</label>
                <div class="col-lg-8">
-                 <input type="number" class="form-control" name="course" placeholder="1234">
+                 <input type="number" class="form-control" name="course" placeholder="1234" ng-model="course">
                </div>
             </div>
             <div class="form-group">
                 <label for="semester" class="col-lg-4 control-label">Semester</label>
                 <div class="col-lg-8">
-                  <select class="form-control" name="semester">
+                  <select class="form-control" name="semester" ng-model="semester">
                     <option>Spring 2015</option>
                   </select>
                 </div>
             </div>
             <div class="form-group">
                <div class="col-lg-8 col-lg-offset-4">
-                  <button class="btn btn-primary btn-lg">Get Notified</button>
+                  <button class="btn btn-primary btn-lg" ng-click="submit(email, course, semester)">Get Notified</button>
                </div>
             </div>
           </form>
@@ -97,5 +96,28 @@
     </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+  <script>
+    angular.module('App',[])
+            .controller('Ctrl', ['$scope', '$http', function($scope, $http) {
+              $scope.greeting = 'Hola!';
+              console.log($scope.greeting);
+              $scope.submit = function(email, course, semester) {
+                console.log("email: " + email);
+                console.log("course: " + course);
+                console.log("semester: " + semester);
+
+                $http.post('/watch', {email: email, course: course, semester: semester})
+                        .success(function (data, status, headers, config) {
+                          console.log("successsss");
+                        })
+                        .error(function (data, status, headers, config) {
+                          console.log(data);
+                        });
+              };
+
+
+    }]);
+  </script>
 </body>
 </html>
